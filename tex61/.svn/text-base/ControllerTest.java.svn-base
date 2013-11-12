@@ -1,0 +1,54 @@
+package tex61;
+
+import java.io.PrintWriter;
+
+import org.junit.Test;
+import static org.junit.Assert.*;
+
+/** Unit tests of Controller.
+ *  @author Ian Fox
+ */
+public class ControllerTest {
+
+    private void newController() {
+        print = new PrintWriter(System.out);
+        output = new Controller(print);
+    }
+
+    @Test
+    /** test of printercontents.*/
+    public void testCurrWord() {
+        newController();
+        output.addText("Hey ");
+        output.addText("I'm ");
+        output.addText("tired");
+        assertEquals("Testing addText:", "Hey I'm tired",
+            output.getCurrWord());
+    }
+
+    @Test
+    /** test of the Endword.*/
+    public void testCurrEndWord() {
+        newController();
+        output.addText("Using ");
+        output.addText("current endword ");
+        output.addText("now.");
+        assertEquals("Testing addText in EndNoteMode",
+            "", output.getCurrEndWord());
+    }
+
+    @Test
+    /** testing Boolean effectiveness. */
+    public void modeSetter() {
+        newController();
+        assertEquals("Testing setEndNoteAbilities:",
+            false, output.getMode());
+    }
+
+    /** Collects output to a PrintWriter. */
+    private PrintWriter print;
+    /** Collects output from a PageAssembler. */
+    private PrintWriter writer;
+    /** Target PageAssembler. */
+    private Controller output;
+}

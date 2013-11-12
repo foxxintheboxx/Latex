@@ -1,0 +1,22 @@
+K 10
+svn:ignore
+V 269
+
+
+Controller.class
+Defaults.class
+EndNoteAssembler.class
+FormatException.class
+InputParser.class
+InputParserTest.java
+LineAssembler.class
+Main.class
+PageAssembler.class
+PageAssemblerTest.class
+PagePrinter.class
+ParagraphCollector.class
+UnitTest.class
+sentinel
+test1.tx
+
+END

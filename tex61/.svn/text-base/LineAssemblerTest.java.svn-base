@@ -1,0 +1,73 @@
+package tex61;
+
+import java.io.PrintWriter;
+
+import org.junit.Test;
+import static org.junit.Assert.*;
+
+/** Unit tests of InputParser.
+ *  @author Ian Fox
+ */
+public class LineAssemblerTest {
+
+    /** builds a new line Assembler.*/
+    private void buildLineAssembler() {
+        print = new PagePrinter(new PrintWriter(System.out));
+        page = new ParagraphCollector(print);
+        output = new LineAssembler(page);
+    }
+
+    @Test
+    /** test of printercontents.*/
+    public void indentation() {
+        buildLineAssembler();
+        output.setParIndentation(6);
+        output.setIndentation(6);
+        assertEquals("Showing indentation", 12,
+            output.dIndent().length());
+    }
+    @Test
+    /** testof Collector Contents.*/
+    public void testStandardFormat() {
+        buildLineAssembler();
+        output.setTextWidth(3);
+        output.setTextWidth(8);
+        assertEquals("shows capability of textwidth",
+            8, output.getWidth());
+    }
+    @Test
+    /** testof Collector Contents.*/
+    public void spaceHelper() {
+        buildLineAssembler();
+        String blanks = output.spaceHelper(12, 2, 2, 2);
+        assertEquals("Showing space helper", 22, blanks.length());
+    }
+
+    @Test
+    /** test of veryfirstline. */
+    public void largeWord() {
+        buildLineAssembler();
+        output.addWord("hey");
+        output.endParagraph();
+        assertEquals("Shows functionality of endparagraph()",
+            null, output.getLine());
+    }
+    @Test
+    /** shows the capability of justify. */
+    public void textwidth() {
+        buildLineAssembler();
+        output.setTextWidth(5);
+        assertEquals("shows capability of textwidth",
+            5, output.getWidth());
+
+    }
+
+    /** Collects output from a PageAssembler. */
+    private PrintWriter writer;
+    /** Lines of test data. */
+    private ParagraphCollector page;
+    /** Lines from a PageCollector. */
+    private PagePrinter print;
+    /** Target PageAssembler. */
+    private LineAssembler output;
+}
